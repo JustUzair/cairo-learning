@@ -11,3 +11,9 @@
 ```bash
     scarb cairo-run
 ```
+
+## Run Tests (Refer to ['test'](/src/test.cairo))
+
+```bash
+    scarb cairo-test
+```

@@ -2,11 +2,14 @@ use core::dict::Felt252DictEntryTrait;
 pub mod array_module;
 pub mod copy_trait;
 pub mod struct_module;
+
+
+
 use struct_module::RectangleImpl;
 use struct_module::RectangleTrait;
-
-
 use core::dict::Felt252Dict;
+use core::panic_with_felt252;
+
 
 
 
@@ -67,13 +70,22 @@ fn main() {
     ///                   Structs Module                    ///
     /////////////////////////////////////////////////////////////
 
-    struct_module::test_struct();
-    let rect = struct_module::create_rectangle(10,20);
-    println!("Length , Breadth = {:?}", rect.dimension() );
-    println!("Area of rectangle: {:?}",rect.area());
+    // struct_module::test_struct();
+    // let rect = struct_module::create_rectangle(10,20);
+    // println!("Length , Breadth = {:?}", rect.dimension() );
+    // println!("Area of rectangle: {:?}",rect.area());
 
-    // let rect1 = Rectangle { width: 30, height: 50, };
-    // println!("Area is {}", rect1.area());
+
+    //////////////////////////////////////////////////////////////
+    ///                  Panic with felt252                    ///
+    //////////////////////////////////////////////////////////////
+    // panic_with_felt252(2);
+
+    //////////////////////////////////////////////////////////////
+    ///                 Recoverable Errors                     ///
+    /////////////////////////////////////////////////////////////
+    // parse_u8(257);
+
 }
 
 fn foo(x: u8, y: u8) {}
@@ -92,3 +104,11 @@ fn test_unsigned_integers(){
     let y:u8 = 128;
     println!("x + y = {}", x + y);
 }
+
+fn parse_u8(s: felt252) -> Result<u8, felt252> {
+    match s.try_into() {
+        Option::Some(value) => Result::Ok(value),
+        Option::None => Result::Err('Invalid integer'),
+    }
+}
+
