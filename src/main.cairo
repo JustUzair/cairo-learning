@@ -2,10 +2,15 @@ use core::dict::Felt252DictEntryTrait;
 pub mod array_module;
 pub mod copy_trait;
 pub mod struct_module;
-
+use struct_module::RectangleImpl;
+use struct_module::RectangleTrait;
 
 
 use core::dict::Felt252Dict;
+
+
+
+
 fn main() {
     //////////////////////////////////////////////////////////////
     ///                     Array Module                      ///
@@ -63,6 +68,12 @@ fn main() {
     /////////////////////////////////////////////////////////////
 
     struct_module::test_struct();
+    let rect = struct_module::create_rectangle(10,20);
+    println!("Length , Breadth = {:?}", rect.dimension() );
+    println!("Area of rectangle: {:?}",rect.area());
+
+    // let rect1 = Rectangle { width: 30, height: 50, };
+    // println!("Area is {}", rect1.area());
 }
 
 fn foo(x: u8, y: u8) {}
